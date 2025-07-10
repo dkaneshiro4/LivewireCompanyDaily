@@ -12,11 +12,18 @@ use Livewire\Component;
 
 class CompanyCreate extends Component
 {
-    public CompanyForm $form;
-
     public Collection $countries;
 
     public Collection $cities;
+
+    #[Validate('required|min:3|max:255')]
+    public string $name = '';
+
+    #[Validate('required')]
+    public string $country = '';
+
+    #[Validate('required')]
+    public string $city = '';
 
     public $savedName = '';
 
@@ -33,9 +40,9 @@ class CompanyCreate extends Component
 
     public function updated($property): void
     {
-        if($property == 'country') {
+        if ($property == 'country') {
             $this->cities = City::where('country_id', $this->country)->get();
-            $this->form->city = $this->cities->first()->id;
+            $this->city = $this->cities->first()->id;
         }
     }
 
@@ -43,9 +50,11 @@ class CompanyCreate extends Component
     {
         $this->validate();
 
-        Company::create(
-            $this->form->all()
-        );
+        Company::create([
+            'name' => $this->name,
+            'country_id' => $this->country,
+            'city_id' => $this->city,
+        ]);
 
         $this->savedName = $this->name;
 
