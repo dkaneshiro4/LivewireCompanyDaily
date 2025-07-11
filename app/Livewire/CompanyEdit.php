@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Company;
 use App\Models\Country;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -46,7 +47,8 @@ class CompanyEdit extends Component
 
     public function render()
     {
-        return view('livewire.company-edit');
+        return view('livewire.company-edit')
+            ->title('Edit Company '. $this->name);
     }
 
     public function save(): void

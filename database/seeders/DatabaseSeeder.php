@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,12 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+//        User::factory()->create([
+//            'name' => 'Test User',
+//            'email' => 'test@example.com',
+//        ]);
+//
+//        $this->call(CountrySeeder::class);
+//        $this->call(CitySeeder::class);
 
-        $this->call(CountrySeeder::class);
-        $this->call(CitySeeder::class);
+        Post::factory(5)
+            ->hasComments()
+            ->create();
     }
 }
